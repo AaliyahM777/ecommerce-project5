@@ -8,10 +8,12 @@ const helmet= require('helmet');
 const morgan= require('morgan')
 const Product= require('./models/products');
 const mongoose= require('mongoose');
+const path = require('path');
+const fs = require('fs')
 
 const app = express();
 const PORT = 3001
-let uri="";
+let uri=process.env.ATLAS_URI;
 
 if(process.env.NODE_ENV ==="production"){
   app.use(express.static("client/build"));
@@ -41,7 +43,11 @@ app.use (helmet()); // added security for server
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 // support express of application/json type post data
-app.use(morgan());
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
+app.use(morgan("dev", { stream: accessLogStream }));
 
 
 
@@ -51,18 +57,18 @@ app.use((req, res, next) => {
 })
 
 
-app.get('/api/products', async (req, res)=> {
- const products = await Product.find();
- res.status(200).send(products);
-})
+// app.get('/api/products', async (req, res)=> {
+//  const products = await Product.find();
+//  res.status(200).send(products);
+// })
 
 
-const usersRoutes = require('./Routes/users')
+const usersRoutes = require('./Routes/usersRouter')
 const productsRouter = require('./Routes/products');
 
-app.get('/api', (req, res) => {
-    res.json({message: "API root"})
-})
+// app.get('/api', (req, res) => {
+//     res.json({message: "API root"})
+// })
 app.use('/api/users', usersRoutes)
 app.use('/api/products',productsRouter);
 

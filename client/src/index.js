@@ -8,8 +8,8 @@ import Footer from './Components/elements/Footer';
 import Home from './Components/pages/Home';
 import Products from './Components/pages/Products';
 import Contacts from './Components/pages/Contacts';
-import { Switch, Route, Redirect ,  BrowserRouter as Router} from 'react-router-dom'
-import httpClient from './Components/elements/httpClient'
+import { Switch, Route, Redirect , BrowserRouter as Router} from 'react-router-dom'
+import httpClient from './httpClient'
 import LogIn from './Components/elements/Login'
 import LogOut from './Components/elements/Logout'
 import SignUp from './Components/elements/Signup'
@@ -52,8 +52,6 @@ class App extends React.Component {
                             ? <Products />
                             : <Redirect to="/login" />
                     }} />
-                  
-
                 </Switch>
                 <Footer/>
             </div>

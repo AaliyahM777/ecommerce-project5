@@ -2,13 +2,9 @@ import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import { serverResponse } from 'http'
 
-
-
 // instantiate axios
 
 const httpClient = axios.create()
-
-
 
 httpClient.getToken = function () {
 

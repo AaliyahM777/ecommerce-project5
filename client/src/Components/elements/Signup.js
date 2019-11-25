@@ -1,5 +1,5 @@
 import React from 'react';
-import httpClient from './httpClient';
+import httpClient from '../../httpClient';
 import { Link } from 'react-router-dom';
 // sign up form behaves almost identically to log in form. We could create a flexible Form component to use for both actions, but for now we'll separate the two:
 class SignUp extends React.Component {
